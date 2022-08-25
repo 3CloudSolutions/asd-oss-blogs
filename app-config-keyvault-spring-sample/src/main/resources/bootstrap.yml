@@ -1,0 +1,17 @@
+spring:
+  cloud:
+    azure:
+      appconfiguration:
+        enabled: true
+        stores:
+          -
+            endpoint: ${APP_CONFIGURATION_ENDPOINT}
+            monitoring:
+              enabled: true
+              refresh-interval: 20s
+              triggers:
+                -
+                  key: sentinel-keys
+            selects:
+              -
+                key-filter: /demofilter/

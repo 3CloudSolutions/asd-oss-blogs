@@ -1,0 +1,2 @@
+org.springframework.cloud.bootstrap.BootstrapConfiguration=\
+com._3cloudsolutions.demo.appconfigkeyvault.config.AzureBootConfig

@@ -1,9 +1,11 @@
 # Objective
 
-To demonstrate how to enable telemetry delivery to Azure Application Insights with a containerized Java application. This document demonstrates the creation of an assembly file to instruct Maven to build a zip file with the necessary project file, modify the pom.xml file with the required publish settings, and create the Dockerfile essential to the creation of the container image. Finally, to tie everything together, an explanation of how to run and test the process locally.
+To demonstrate how to enable application telemetry delivery to Azure Application Insights with a containerized Java application. This document demonstrates the creation of an assembly file to instruct Maven to build a zip file with the necessary project files, modification the pom.xml file with the required publish settings, and the Dockerfile for the container image. Finally, to tie everything together, an explanation of how to run and test the process locally.
 
-To get this example to work, you need to install an IDE such as [IntelliJ from JetBrains](https://www.jetbrains.com/idea/download/) and [Docker for Desktop](https://www.docker.com/products/docker-desktop/)
-
+To get this example to work, you need the following:
+ - IDE such as [IntelliJ from JetBrains](https://www.jetbrains.com/idea/download/) 
+ - [Docker for Desktop](https://www.docker.com/products/docker-desktop/)
+ - [Sample Source Code](https://github.com/3CloudSolutions/asd-oss-blogs)
 # Assembly File
 The Assembly Plugin for Maven enables developers to combine project output into a single distributable archive. For example, assume that a Maven project defines a single JAR artifact that contains both a console application and a Swing application. Such a project could define two "assemblies" that bundle the application with a different set of supporting scripts and dependency sets. One assembly would be the assembly for the console application, and the other could be a Swing application bundled with a slightly different set of dependencies. This assembly aims to package the project-generated JAR file and the AppInsights JAR file into a single Zip file.
 ````xml
@@ -29,7 +31,7 @@ The Assembly Plugin for Maven enables developers to combine project output into 
 ````
 # Pom file Additions
 
-Two plug-ins needed to be added to the POM file. One is to copy the _applicationinsights-agent-3.4.1.jar_ into the resource directory, and the other is to 
+Two plug-ins needed to be added to the POM file. The first gives maven the command to copy the _applicationinsights-agent-3.4.1.jar_ into the resource directory
 
 ````xml
 <plugin>
@@ -61,8 +63,7 @@ Two plug-ins needed to be added to the POM file. One is to copy the _application
     </configuration>
 </plugin>
 ````
-
-Create the zip file based on the zip-assembly file.
+The second will create the zip file based on the zip-assembly file.
 
 ````xml
 <plugin>
@@ -92,12 +93,15 @@ Create the zip file based on the zip-assembly file.
 # Docker File
 
 
-Adding Four goals to the Docker file base on the openjdk:17-alpine image:
+There are five goals to the Docker file base on the openjdk:17-alpine image:
 
 1. Install the zip package into the container
 2. Copy the AppInsightsAgentAssembly.zip into the container
 3. Unzip the file
 4. Add a command line argument to refer to the jar file on startup
+5. Clean up the zip file
+
+````dockerfile
 
 
 ````dockerfile
@@ -153,4 +157,4 @@ docker run -it -p 8080:8080 --env-file=.env myimage:latest
 
 # Final Thoughts
 
-Detailed information on the [Java In-Process Agent](https://learn.microsoft.com/en-us/azure/azure-monitor/app/java-in-process-agent) from Microsoft is found on their website, and to download the source code, visit our GitHub site.
+Detailed information on the [Java In-Process Agent](https://learn.microsoft.com/en-us/azure/azure-monitor/app/java-in-process-agent) from Microsoft is found on their website, and to download the source code, visit [3Cloud Solutions GitHub](https://github.com/3CloudSolutions/asd-oss-blogs).

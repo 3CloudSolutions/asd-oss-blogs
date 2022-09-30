@@ -1,13 +1,13 @@
-package com.cloudsolutions.AppInsightsAgentAssembly;
+package com._3cloudsolutions.appinsightinprocessagent;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class AppInsightsAgentAssemblyApplication {
+public class AppInsightInprocessAgentApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(AppInsightsAgentAssemblyApplication.class, args);
+		SpringApplication.run(AppInsightInprocessAgentApplication.class, args);
 	}
 
 }

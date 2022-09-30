@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.3cloudsolutions</groupId>
-	<artifactId>AppInsightsAgentAssembly</artifactId>
+	<artifactId>appinsightinprocessagent</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>AppInsightsAgentAssembly</name>
+	<name>appinsightinprocessagent</name>
 	<description>This is project to demonstrate packing the AppInsights Agent for a zip deployment </description>
 	<properties>
 		<java.version>17</java.version>

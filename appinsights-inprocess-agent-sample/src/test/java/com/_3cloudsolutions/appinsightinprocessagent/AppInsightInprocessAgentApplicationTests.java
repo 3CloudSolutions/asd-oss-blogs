@@ -1,4 +1,4 @@
-package com.cloudsolutions.AppInsightsAgentAssembly;
+package com._3cloudsolutions.appinsightinprocessagent;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

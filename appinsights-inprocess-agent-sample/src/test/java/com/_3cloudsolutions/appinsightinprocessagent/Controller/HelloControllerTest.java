@@ -1,6 +1,7 @@
-package com.cloudsolutions.AppInsightsAgentAssembly.Controller;
+package com._3cloudsolutions.appinsightinprocessagent.Controller;
 
-import com.cloudsolutions.AppInsightsAgentAssembly.AppInsightsAgentAssemblyApplication;
+
+import com._3cloudsolutions.appinsightinprocessagent.AppInsightInprocessAgentApplication;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -9,7 +10,7 @@ import org.springframework.http.ResponseEntity;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-@SpringBootTest(classes = AppInsightsAgentAssemblyApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@SpringBootTest(classes = AppInsightInprocessAgentApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 
 class HelloControllerTest {
     @Autowired

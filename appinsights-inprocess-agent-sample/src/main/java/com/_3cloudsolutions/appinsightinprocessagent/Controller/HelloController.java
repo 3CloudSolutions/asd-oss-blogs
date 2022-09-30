@@ -1,4 +1,4 @@
-package com.cloudsolutions.AppInsightsAgentAssembly.Controller;
+package com._3cloudsolutions.appinsightinprocessagent.Controller;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;

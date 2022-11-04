@@ -5,7 +5,7 @@ Azure Key Vault is a cloud service that provides secure storage and access to se
 In this tutorial we’ll show how you can utilize Azure App Configuration to fetch application configurations and secrets on startup and when they are updated.  The completed application can be run in Azure using Managed Identity as well as locally on a desktop without any code changes.
 
 ## Setting up your project
-* First we are going to create a new repository with the necessary dependencies.  If you do not have IntelliJ, navigate to the Spring Initilizr page, start.spring.io.  In IntelliJ, choose File -> New -> Project and select Spring Initializr.
+* First we are going to create a new repository with the necessary dependencies.  If you do not have IntelliJ, navigate to the Spring Initilizr page, [start.spring.io](start.spring.io).  In IntelliJ, choose File -> New -> Project and select Spring Initializr.
 * Enter in your project information, in this tutorial we are using Spring Boot 2.7.2 and Java 17.  The version of Spring Boot does need to be greater than 2.6.0 for support.
 * In your dependencies section, you will want “Cloud Bootstrap” and “Azure Support”.  These are 2 BOMs that contain dependencies needed to support this tutorial.
 ![](./initialzr.png)
@@ -238,5 +238,8 @@ spring:
 * In App Configuration, re-create the keys listed above, with the exception of sentinel-keys, replacing **“/application/” with “/demofilter/”** and re-start your application, it should now pull values using this filter.
 
 ## Summary
-I hope that this tutorial was useful.  Please note that if you do not want to use a credential provider to access App Configuration via its Endpoint, you can use the Connection String.  To do so, in the *bootstrap.yml* file, replace the **“endpoint”** key with **“connection-string”** and update your environment variable to the connection string value.
-Also note that if using App Configuration on a developer machine doesn’t make sense to your organization, changing the value of enabled to be false will disable the fetching of values, and the application will expect an application.yml file to exist with the key values.
+I hope that this tutorial was useful.  Please note that if you do not want to use a credential provider to access App Configuration via its Endpoint, you can use the Connection String.  To do so, in the *bootstrap.yml* file, replace the **“endpoint”** key with **“connection-string”** and update your environment variable to the connection string value.&nbsp;
+
+Also note that if using App Configuration on a developer machine doesn’t make sense to your organization, changing the value of enabled to be false will disable the fetching of values, and the application will expect an application.yml file to exist with the key values.&nbsp;
+
+A full version of the source code can be found on Github at https://github.com/3CloudSolutions/asd-oss-blogs/tree/main/app-config-keyvault-spring-sample

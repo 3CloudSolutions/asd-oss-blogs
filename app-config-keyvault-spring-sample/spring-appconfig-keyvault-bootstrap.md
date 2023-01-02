@@ -238,8 +238,7 @@ spring:
 * In App Configuration, re-create the keys listed above, with the exception of sentinel-keys, replacing **“/application/” with “/demofilter/”** and re-start your application, it should now pull values using this filter.
 
 ## Summary
-I hope that this tutorial was useful.  Please note that if you do not want to use a credential provider to access App Configuration via its Endpoint, you can use the Connection String.  To do so, in the *bootstrap.yml* file, replace the **“endpoint”** key with **“connection-string”** and update your environment variable to the connection string value.&nbsp;
+I hope that this tutorial was useful.  Please note that if you do not want to use a credential provider to access App Configuration via its Endpoint, you can use the Connection String.  To do so, in the *bootstrap.yml* file, replace the **“endpoint”** key with **“connection-string”** and update your environment variable to the connection string value.
+Also note that if using App Configuration on a developer machine doesn’t make sense to your organization, changing the value of enabled to be false will disable the fetching of values, and the application will expect an application.yml file to exist with the key values.
 
-Also note that if using App Configuration on a developer machine doesn’t make sense to your organization, changing the value of enabled to be false will disable the fetching of values, and the application will expect an application.yml file to exist with the key values.&nbsp;
-
-A full version of the source code can be found on Github at https://github.com/3CloudSolutions/asd-oss-blogs/tree/main/app-config-keyvault-spring-sample
+A full version of the source code can be found on Github at [https://github.com/3CloudSolutions/asd-oss-blogs/tree/main/app-config-keyvault-spring-sample](https://github.com/3CloudSolutions/asd-oss-blogs/tree/main/app-config-keyvault-spring-sample)

@@ -8,7 +8,7 @@
         <version>2.7.8</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>com._3cloudsolutions</groupId>
+    <groupId>com._3cloudsolutions.samples</groupId>
     <artifactId>sms-sender</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>sms-sender</name>

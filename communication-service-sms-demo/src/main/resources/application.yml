@@ -2,7 +2,7 @@ server:
   port: 8080
 
 sms:
-  from-number: [created-sending-number]
-  endpoint: https://[endpoint].communication.azure.com
-  azure-key-credential: [key-from-communication-service]
-  connection-string: [connection-string-for-communication-service]
+  from-number: ${SENDING_NUMBER}
+  endpoint: ${SMS_ENDPOINT}
+  azure-key-credential: ${SMS_KEY_CREDENTIAL}
+  connection-string: ${SMS_CONNECTION_STRING}

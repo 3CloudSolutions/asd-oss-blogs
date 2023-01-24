@@ -2,3 +2,5 @@
 *.class
 target/classes/META-INF/spring-configuration-metadata.json
 target
+*.lock
+*.bin

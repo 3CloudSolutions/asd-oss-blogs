@@ -1,0 +1,8 @@
+server:
+  port: 8080
+
+sms:
+  from-number: ${SENDING_NUMBER}
+  endpoint: ${SMS_ENDPOINT}
+  azure-key-credential: ${SMS_KEY_CREDENTIAL}
+  connection-string: ${SMS_CONNECTION_STRING}

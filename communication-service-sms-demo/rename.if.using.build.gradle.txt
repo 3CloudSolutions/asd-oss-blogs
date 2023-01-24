@@ -1,0 +1,47 @@
+buildscript {
+    dependencies {
+        classpath "net.linguica.gradle:maven-settings-plugin:0.5"
+    }
+}
+
+plugins {
+    id 'org.springframework.boot' version '2.7.8'
+    id 'io.spring.dependency-management' version '1.1.0'
+    id 'java'
+}
+
+group = 'com._3cloudsolutions.samples'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '17'
+
+repositories {
+    mavenCentral()
+}
+
+ext {
+    set('springCloudAzureVersion', "4.5.0")
+    set('springCloudVersion', "2021.0.3")
+}
+
+dependencies {
+    implementation 'com.azure.spring:spring-cloud-azure-starter'
+    implementation 'org.springframework.cloud:spring-cloud-starter'
+    implementation 'org.springframework.boot:spring-boot-devtools'
+    implementation 'com.azure:azure-communication-sms'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    annotationProcessor 'org.projectlombok:lombok:1.18.24'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+dependencyManagement {
+    imports {
+        mavenBom "com.azure.spring:spring-cloud-azure-dependencies:${springCloudAzureVersion}"
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+    }
+}
+
+apply plugin: 'net.linguica.maven-settings'
+
+tasks.named('test') {
+    useJUnitPlatform()
+}

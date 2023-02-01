@@ -1,0 +1,25 @@
+.row {
+    display: flex;
+}
+
+.column-nav {
+    flex: 10%;
+}
+
+.column-content {
+    flex: 90%;
+}
+
+
+
+table {
+    border-collapse: collapse;
+    max-width: 700px;
+    width: 100%;
+}
+
+th, td {
+    border: 1px solid #a73535;
+    padding: 8px;
+    text-align: center;
+}

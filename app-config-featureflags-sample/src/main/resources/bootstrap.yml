@@ -1,0 +1,16 @@
+spring:
+  cloud:
+    azure:
+      appconfiguration:
+        enabled: true
+        stores:
+          - connection-string: ${APP_CONFIGURATION_CONNECTION_STRING}
+            monitoring:
+              enabled: true
+              refresh-interval: 20s
+              triggers:
+                - key: sentinel-keys
+            selects:
+              - key-filter: /ff-demo/
+            feature-flags:
+              enabled: true

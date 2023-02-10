@@ -29,7 +29,7 @@ public class FeatureFlagsController {
     }
 
     @GetMapping(value = {"/hello", "/hellon"}, produces = APPLICATION_JSON_VALUE)
-    @FeatureGate(feature = "demoFlag1", fallback = "/helloff")
+    @FeatureGate(feature = "DemoFlag", fallback = "/helloff")
     public Mono<String> getHelloOff() throws JsonProcessingException {
         DemoValueDTO demoValueDTO = new DemoValueDTO(demoValue);
         demoValueDTO.setFeatureFlagStatus("the feature flag is enabled");

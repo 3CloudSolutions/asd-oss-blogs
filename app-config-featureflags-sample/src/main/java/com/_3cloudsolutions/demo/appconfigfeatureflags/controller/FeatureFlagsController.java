@@ -30,14 +30,14 @@ public class FeatureFlagsController {
 
     @GetMapping(value = {"/hello", "/hellon"}, produces = APPLICATION_JSON_VALUE)
     @FeatureGate(feature = "DemoFlag", fallback = "/helloff")
-    public Mono<String> getHelloOff() throws JsonProcessingException {
+    public Mono<String> getHelloOn() throws JsonProcessingException {
         DemoValueDTO demoValueDTO = new DemoValueDTO(demoValue);
         demoValueDTO.setFeatureFlagStatus("the feature flag is enabled");
         return Mono.just(toJson(demoValueDTO));
     }
 
     @GetMapping(value = "/helloff", produces = APPLICATION_JSON_VALUE)
-    public Mono<String> getHelloOn() throws JsonProcessingException {
+    public Mono<String> getHelloOff() throws JsonProcessingException {
         DemoValueDTO demoValueDTO = new DemoValueDTO(demoValue);
         demoValueDTO.setFeatureFlagStatus("the feature flag is not enabled");
         return Mono.just(toJson(demoValueDTO));

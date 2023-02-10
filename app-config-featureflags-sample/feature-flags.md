@@ -20,12 +20,12 @@ In this tutorial we'll show you how to utilize App Configuration to support Feat
 ## Adding the Feature Flags to Azure
 
 - As mentioned,Azure App Configurationprovides a convenient solution for maintaining Feature Flags. In this tutorial we will be using two App Configurations for responding to the request, a Feature Flag and a sentinel key used for the application to receive updates when a key and/or Feature Flag is updated.
-- In yourApp Configuration_, using the **Configuration Explorer** in the Portal, create the following keys and add values:
+- In your *App Configuration* resource, using the **Configuration Explorer** in the Portal, create the following keys and add some values:
   - **/ff-demo/content.value1**, the DTO has a field named question that this maps to
   - **/ff-demo/content.value2** the DTO has a field named answer that this maps to
-  - **sentinel-keys** will be used as a trigger when something gets updated
+  - **sentinel-keys** will be used as a trigger when something in App Configuration gets updated
 - Now in the Portal select **Feature manager** and then **Create**. This will take you to a form to create a new Feature Flag. For the Feature flag name type "**DemoFlag**". For purposes of this tutorial, do not click the Enable feature flag radio button…yet. For this tutorial, there is no need to worry about populating the remaining form, so just click **Apply**.
-- While you are in App Configuration, go to theAccess Keysand copy theConnection stringvalue. If you are interested in using the App Configuration Endpoint and a token rather than the connection string, you can review my blog about that located **[here]**, but for now we will just use connection string for simplicity.
+- While you are in *App Configuration*, go to the **Access Keys** and copy the *Connection string* value. If you are interested in using the App Configuration Endpoint and a token rather than the connection string, you can review my blog about that located **[here](https://3cloudsolutions.com/resources/bootstrapping-azure-app-configuration-and-key-vault-in-a-spring-boot-application/)**, but for now we will just use connection string for simplicity.
 - We are now ready to start adding code.
 
 ## Updating your dependencies
@@ -102,10 +102,10 @@ public class DemoValue {
 ```java
 @SpringBootApplication
 @EnableConfigurationProperties({DemoValue.class})
-public class FeatureFlagsGradleApplication {
+public class AppConfigFeatureflagsApplication {
 
   public static void main(String[] args) {
-    SpringApplication._run_(FeatureFlagsGradleApplication.class, args);
+    SpringApplication.run(AppConfigFeatureflagsApplication.class, args);
   }
 }
 ```
@@ -150,7 +150,7 @@ public class FeatureFlagsController {
 
     private DemoValue demoValue;
     private FeatureManager featureManager;
-    private ObjectMapper objectMapper = new ObjectMapper().enable(SerializationFeature._INDENT_OUTPUT_);
+    private ObjectMapper objectMapper = new ObjectMapper().enable(SerializationFeature.INDENTOUTPUT);
 
     public FeatureFlagsController(DemoValue demoValue,
                     FeatureManager featureManager) {
@@ -162,33 +162,33 @@ public class FeatureFlagsController {
 - Since I am using ObjectMapper, I have also created a private convenience method to do the serialization as follows:
 ```java
     private String toJson(Object object) throws JsonProcessingException {
-        objectMapper.configure(SerializationFeature._FAIL_ON_EMPTY_BEANS_, false);
-        objectMapper.setVisibility(PropertyAccessor._FIELD_, JsonAutoDetect.Visibility._ANY_);
+        objectMapper.configure(SerializationFeature.FAILONEMPTYBEANS, false);
+        objectMapper.setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY);
         return objectMapper.writeValueAsString(object);
     }
 ```
 
 - Let's create a simple GET endpoint, named **"/hellooff"** that will manage requests without the Feature Flag being enabled, you can see that I am calling my private method to generate the JSON response:
 ```java
-    @GetMapping(value = "/helloff", produces =APPLICATION_JSON_VALUE_)
-    public Mono<String> getHelloOn() throws             JsonProcessingException {
+    @GetMapping(value = "/helloff", produces =APPLICATIONJSONVALUE)
+    public Mono<String> getHelloOff() throws             JsonProcessingException {
         DemoValueDTO demoValueDTO = new DemoValueDTO(demoValue);
         demoValueDTO.setFeatureFlagStatus("the feature flag is not enabled");
-        return Mono._just_(toJson(demoValueDTO));
+        return Mono.just(toJson(demoValueDTO));
     }
 ```
     
 - Now it's time to create the main GET endpoint that will serve requests to **"/hello"** and process them according to the state of the Feature Flag.
 - Create your @GetMapping annotation, and for its value set both **"/hello"** and **"/hellon"**. This is done by wrapping the comma delimited values in braces.
-- We will use a different annotation, named **@FeatureGate**, for using the Feature Flag state for routing. How this works is that if the feature defined in the annotation**("DemoFlag")**is enabled, then the method can be called, if it is disabled it will instead hand off the request to the endpoint defined as it's fallback. Here is how it should look:
+- We will use a different annotation, named **@FeatureGate** for using the Feature Flag state for routing. How this works is that if the feature defined in the annotation **("DemoFlag")** is enabled, then the method can be called, if it is disabled it will instead hand off the request to the endpoint defined as it's fallback. Here is how it should look:
 
 ```java 
-    @GetMapping(value = {"/hello", "/hellon"}, produces =APPLICATION_JSON_VALUE_)
+    @GetMapping(value = {"/hello", "/hellon"}, produces =APPLICATIONJSONVALUE)
     @FeatureGate(feature = "DemoFlag", fallback = "/helloff")
-    public Mono<String> getHelloOff() throws JsonProcessingException {
+    public Mono<String> getHelloOn() throws JsonProcessingException {
         DemoValueDTO demoValueDTO = new DemoValueDTO(demoValue);
         demoValueDTO.setFeatureFlagStatus("the feature flag is enabled");
-        return Mono._just_(toJson(demoValueDTO));
+        return Mono.just(toJson(demoValueDTO));
     }
 ```
 

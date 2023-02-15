@@ -30,8 +30,7 @@ public class SmsClientConfig {
                 //.connectionString(smsServerConfig.getConnectionString())
 
                 // DefaultCredentialBuilder below won't work CURRENTLY without client_id, tenant and secret
-                // Microsoft hasn't implemented it yet
-                //
+                // Doesn't seem to be implemented yet to work with something like CLI credentials
                 //.endpoint(smsServerConfig.getEndpoint())
                 //.credential(new DefaultAzureCredentialBuilder().build())
 
@@ -51,8 +50,7 @@ public class SmsClientConfig {
                 //.connectionString(smsServerConfig.getConnectionString())
 
                 // DefaultCredentialBuilder below won't work CURRENTLY without client_id, tenant and secret
-                // Microsoft hasn't implemented it yet
-                //
+                // Doesn't seem to be implemented yet to work with something like CLI credentials
                 //.endpoint(smsServerConfig.getEndpoint())
                 //.credential(new DefaultAzureCredentialBuilder().build())
 

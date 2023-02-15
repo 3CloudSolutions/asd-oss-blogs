@@ -2,6 +2,8 @@ package com._3cloudsolutions.smssender.controller;
 
 import com._3cloudsolutions.smssender.service.SmsService;
 import com.azure.communication.sms.models.SmsSendResult;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import net.minidev.json.JSONArray;
 import net.minidev.json.JSONObject;
 import org.springframework.http.HttpStatus;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @CrossOrigin
 @RestController
@@ -17,6 +20,7 @@ public class SmsController {
     // TODO: validate group SMS numbers
 
     private SmsService smsService;
+    final ObjectMapper objectMapper = new ObjectMapper();
 
     public SmsController(SmsService smsService) {
         this.smsService = smsService;
@@ -81,8 +85,13 @@ public class SmsController {
     }
 
     @GetMapping("/groupsms")
-    Mono<ResponseEntity<?>> sendGroupSms(@RequestParam(name = "toAddress") List<String> toAddresses,
-                                    @RequestParam(name = "message") String message) {
+    Mono<ResponseEntity<?>> sendGroupSms(@RequestParam(name = "message") String message,
+                                         @RequestBody String jsonAddresses) throws JsonProcessingException {
+        Set<String> toAddressesUnvalidated = objectMapper.readValue(jsonAddresses, Set.class);
+        List<String> toAddresses = new ArrayList<>();
+        for (String address : toAddressesUnvalidated ) {
+            toAddresses.add(validateUSPhoneNumber(address));
+        }
         List<String> failed = new ArrayList<>();
         int failureCount = 0;
         JSONObject response = new JSONObject();

@@ -7,7 +7,7 @@ import com.azure.spring.cloud.config.KeyVaultCredentialProvider;
 
 public class AzureCredentials implements AppConfigurationCredentialProvider, KeyVaultCredentialProvider {
 
-     @Override
+    @Override
     public TokenCredential getKeyVaultCredential(String uri) {
 			return getCredential();
     }

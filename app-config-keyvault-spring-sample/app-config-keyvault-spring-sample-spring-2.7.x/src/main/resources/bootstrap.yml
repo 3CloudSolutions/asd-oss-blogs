@@ -12,6 +12,6 @@ spring:
               triggers:
                 -
                   key: sentinel-keys
-            selects:
-              -
-                key-filter: /demofilter/
+            #selects:
+            #  -
+            #    key-filter: /demofilter/

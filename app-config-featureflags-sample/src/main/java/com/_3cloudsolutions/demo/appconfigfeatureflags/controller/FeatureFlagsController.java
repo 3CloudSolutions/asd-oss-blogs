@@ -2,8 +2,9 @@ package com._3cloudsolutions.demo.appconfigfeatureflags.controller;
 
 import com._3cloudsolutions.demo.appconfigfeatureflags.dto.DemoValueDTO;
 import com._3cloudsolutions.demo.appconfigfeatureflags.models.DemoValue;
-import com.azure.spring.cloud.feature.manager.FeatureGate;
-import com.azure.spring.cloud.feature.manager.FeatureManager;
+
+import com.azure.spring.cloud.feature.management.FeatureManager;
+import com.azure.spring.cloud.feature.management.web.FeatureGate;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.core.JsonProcessingException;
